@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculator</title>
+
+  <style>
+    body {
+      font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', Verdana, sans-serif;
+      margin: 0;
+      background-color: black;
+    }
+
+    .one
+    {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #calculator {
+      width: 250px;
+      border: 2px solid lightskyblue;
+      border-radius: 5px;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(165, 182, 243, 0.8);
+    }
+
+    #calculator:hover{
+        box-shadow: 0 0 10px rgba(118, 221, 234, 0.8);
+    }
+
+    input {
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 10px;
+      font-size: 26px;
+      font-weight: bolder;
+      box-sizing: border-box;
+      background-color: rgb(25, 70, 129);
+      cursor:none;
+      border:none;
+    }
+
+    input:hover{
+        background-color: cadetblue;  
+    }
+    button {
+      width: 48px;
+      height: 48px;
+      margin: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    h4{
+        font-family: 'Courier New', Courier, monospace;
+        font-size: larger;
+        color:honeydew;
+        text-align: center;
+    }
+    button{
+        background-color: lightslategray;
+        border:2px solid rgb(110, 110, 238);
+        border-radius:50%;
+        font-size: larger;
+        font-weight: bolder;
+        color:rgb(55, 36, 141);
+    }
+    button:hover{
+        box-shadow: 0 0 10px rgba(183, 217, 222, 0.8);
+    }
+  </style>
+</head>
+<body>
+<h4>Calculator</h4>
+
+<div class="one">
+<div id="calculator">
+  <input type="text" id="display" readonly>
+
+  <div>
+    <button onclick="appendValue('1')">1</button>
+    <button onclick="appendValue('2')">2</button>
+    <button onclick="appendValue('3')">3</button>
+    <button onclick="setOperator('+')">+</button>
+  </div>
+
+  <div>
+    <button onclick="appendValue('4')">4</button>
+    <button onclick="appendValue('5')">5</button>
+    <button onclick="appendValue('6')">6</button>
+    <button onclick="setOperator('-')">-</button>
+  </div>
+
+  <div>
+    <button onclick="appendValue('7')">7</button>
+    <button onclick="appendValue('8')">8</button>
+    <button onclick="appendValue('9')">9</button>
+    <button onclick="setOperator('*')">*</button>
+  </div>
+
+  <div>
+    <button onclick="appendValue('0')">0</button>
+    <button onclick="clearDisplay()">C</button>
+    <button onclick="calculateResult()">=</button>
+    <button onclick="setOperator('/')">/</button>
+  </div>
+</div>
+</div>
+<script>
+  let currentValue = '';
+  let operator = '';
+  let previousValue = '';
+
+  function appendValue(value) {
+    currentValue += value;
+    updateDisplay();
+  }
+
+  function setOperator(op) {
+    operator = op;
+    previousValue = currentValue;
+    currentValue = '';
+    updateDisplay();
+  }
+
+  function clearDisplay() {
+    currentValue = '';
+    operator = '';
+    previousValue = '';
+    updateDisplay();
+  }
+
+  function calculateResult() {
+    let result;
+
+    switch (operator) {
+      case '+':
+        result = parseFloat(previousValue) + parseFloat(currentValue);
+        break;
+      case '-':
+        result = parseFloat(previousValue) - parseFloat(currentValue);
+        break;
+      case '*':
+        result = parseFloat(previousValue) * parseFloat(currentValue);
+        break;
+      case '/':
+        result = parseFloat(previousValue) / parseFloat(currentValue);
+        break;
+      default:
+        result = currentValue;
+    }
+
+    currentValue = result.toString();
+    operator = '';
+    previousValue = '';
+    updateDisplay();
+  }
+
+  function updateDisplay() {
+    document.getElementById('display').value = currentValue;
+  }
+</script>
+
+</body>
+</html>
