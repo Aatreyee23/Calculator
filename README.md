@@ -1,4 +1,7 @@
 <h1>Calculator</h1>
 <p>
-  The calculator created with the use of HTML,CSS,JavaScript.
+  The calculator was created using HTML, CSS, and JavaScript.
 </p>
+
+
+<h2>Calculator</h2>
