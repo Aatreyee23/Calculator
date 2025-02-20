@@ -1,168 +1,307 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Calculator</title>
-
   <style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #121212;
+    color: #fff;
+    transition: background-color 0.3s, color 0.3s;
+    flex-direction: column;
+  }
+  
+  .container {
+    text-align: center;
+  }
+  
+  h4 {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 2rem;
+    background: linear-gradient(45deg, #2145f8, #6aaaf3);
+    -webkit-background-clip: text;
+    color: transparent;
+    margin-bottom: 20px;
+  }
+  
+  #calculator {
+    width: 100%;
+    max-width: 350px;
+    border: 2px solid #4c6f8c;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 15px rgba(165, 182, 243, 0.8);
+    background-color: #1e1e1e;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  #calculator.light {
+    background-color: #fff;
+    border-color: #b0b0b0;
+  }
+  
+  #calculator:hover {
+    box-shadow: 0 0 20px rgba(118, 221, 234, 0.8);
+  }
+  
+  .display {
+    width: 100%;
+    padding: 15px;
+    font-size: 32px;
+    font-weight: bold;
+    background-color: #0f3c57;
+    border: none;
+    color: #fff;
+    border-radius: 8px;
+    text-align: right;
+    margin-bottom: 20px;
+  }
+  
+  .display.light {
+    background-color: #f3f3f3;
+    color: #333;
+  }
+  
+  button {
+    width: 48px;
+    height: 48px;
+    margin: 8px;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 50%;
+    background-color: #4c6f8c;
+    color: white;
+    border: 2px solid transparent;
+    transition: background-color 0.3s, box-shadow 0.3s;
+  }
+  
+  button:hover {
+    background-color: #6a8eaf;
+    box-shadow: 0 0 10px rgba(118, 221, 234, 0.8);
+  }
+  
+  button:active {
+    background-color: #3b506b;
+  }
+  
+  button.light {
+    background-color: #e0e0e0;
+    color: #333;
+  }
+  
+  button.light:hover {
+    background-color: #c1c1c1;
+  }
+  
+  button:focus {
+    outline: none;
+  }
+  
+  .theme-toggle {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #4c6f8c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .theme-toggle:hover {
+    background-color: #6a8eaf;
+  }
+  
+  @media (max-width: 768px) {
     body {
-      font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', Verdana, sans-serif;
-      margin: 0;
-      background-color: black;
-    }
-
-    .one 
-    {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    #calculator {
-      width: 250px;
-      border: 2px solid lightskyblue;
-      border-radius: 5px;
+      height: auto;
       padding: 20px;
-      box-shadow: 0 0 10px rgba(165, 182, 243, 0.8);
     }
-
-    #calculator:hover{
-        box-shadow: 0 0 10px rgba(118, 221, 234, 0.8);
+  
+    #calculator {
+      max-width: 90%;
+      margin: 0 auto;
     }
-
-    input {
-      width: 100%;
-      margin-bottom: 10px;
-      padding: 10px;
-      font-size: 26px;
-      font-weight: bolder;
-      box-sizing: border-box;
-      background-color: rgb(25, 70, 129);
-      cursor:none;
-      border:none;
+  
+    h4 {
+      font-size: 1.8rem;
     }
-
-    input:hover{
-        background-color: cadetblue;  
+  
+    .display {
+      font-size: 28px;
     }
+  
     button {
-      width: 48px;
-      height: 48px;
-      margin: 5px;
+      width: 40px;
+      height: 40px;
+      font-size: 18px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    body {
+      padding: 15px;
+    }
+  
+    #calculator {
+      max-width: 100%;
+      margin: 0;
+    }
+  
+    h4 {
+      font-size: 1.5rem;
+    }
+  
+    .display {
+      font-size: 24px;
+    }
+  
+    button {
+      width: 36px;
+      height: 36px;
       font-size: 16px;
-      cursor: pointer;
     }
-
-    h4{
-        font-family: 'Courier New', Courier, monospace;
-        font-size: larger;
-        color:honeydew;
-        text-align: center;
+  
+    .theme-toggle {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
     }
-    button{
-        background-color: lightslategray;
-        border:2px solid rgb(110, 110, 238);
-        border-radius:50%;
-        font-size: larger;
-        font-weight: bolder;
-        color:rgb(55, 36, 141);
-    }
-    button:hover{
-        box-shadow: 0 0 10px rgba(183, 217, 222, 0.8);
-    }
-  </style>
+  }
+  </style>  
 </head>
+
 <body>
-<h4>Calculator</h4>
+  <div class="container">
+    <h4>Calculator</h4>
+    <div id="calculator">
+      <input type="text" class="display" id="display" readonly>
 
-<div class="one">
-<div id="calculator">
-  <input type="text" id="display" readonly>
+      <div>
+        <button onclick="appendValue('1')">1</button>
+        <button onclick="appendValue('2')">2</button>
+        <button onclick="appendValue('3')">3</button>
+        <button onclick="setOperator('+')">+</button>
+      </div>
 
-  <div>
-    <button onclick="appendValue('1')">1</button>
-    <button onclick="appendValue('2')">2</button>
-    <button onclick="appendValue('3')">3</button>
-    <button onclick="setOperator('+')">+</button>
+      <div>
+        <button onclick="appendValue('4')">4</button>
+        <button onclick="appendValue('5')">5</button>
+        <button onclick="appendValue('6')">6</button>
+        <button onclick="setOperator('-')">-</button>
+      </div>
+
+      <div>
+        <button onclick="appendValue('7')">7</button>
+        <button onclick="appendValue('8')">8</button>
+        <button onclick="appendValue('9')">9</button>
+        <button onclick="setOperator('*')">*</button>
+      </div>
+
+      <div>
+        <button onclick="appendValue('0')">0</button>
+        <button onclick="clearDisplay()">C</button>
+        <button onclick="calculateResult()">=</button>
+        <button onclick="setOperator('/')">/</button>
+      </div>
+
+      <button class="theme-toggle" onclick="toggleTheme()">&#9788;</button>
+    </div>
   </div>
 
-  <div>
-    <button onclick="appendValue('4')">4</button>
-    <button onclick="appendValue('5')">5</button>
-    <button onclick="appendValue('6')">6</button>
-    <button onclick="setOperator('-')">-</button>
-  </div>
+  <script>
+    let currentValue = '';
+    let operator = '';
+    let previousValue = '';
+    let isDarkMode = true;
 
-  <div>
-    <button onclick="appendValue('7')">7</button>
-    <button onclick="appendValue('8')">8</button>
-    <button onclick="appendValue('9')">9</button>
-    <button onclick="setOperator('*')">*</button>
-  </div>
-
-  <div>
-    <button onclick="appendValue('0')">0</button>
-    <button onclick="clearDisplay()">C</button>
-    <button onclick="calculateResult()">=</button>
-    <button onclick="setOperator('/')">/</button>
-  </div>
-</div>
-</div>
-<script>
-  let currentValue = '';
-  let operator = '';
-  let previousValue = '';
-
-  function appendValue(value) {
-    currentValue += value;
-    updateDisplay();
-  }
-
-  function setOperator(op) {
-    operator = op;
-    previousValue = currentValue;
-    currentValue = '';
-    updateDisplay();
-  }
-
-  function clearDisplay() {
-    currentValue = '';
-    operator = '';
-    previousValue = '';
-    updateDisplay();
-  }
-
-  function calculateResult() {
-    let result;
-
-    switch (operator) {
-      case '+':
-        result = parseFloat(previousValue) + parseFloat(currentValue);
-        break;
-      case '-':
-        result = parseFloat(previousValue) - parseFloat(currentValue);
-        break;
-      case '*':
-        result = parseFloat(previousValue) * parseFloat(currentValue);
-        break;
-      case '/':
-        result = parseFloat(previousValue) / parseFloat(currentValue);
-        break;
-      default:
-        result = currentValue;
+    function appendValue(value) {
+      currentValue += value;
+      updateDisplay();
     }
 
-    currentValue = result.toString();
-    operator = '';
-    previousValue = '';
-    updateDisplay();
-  }
+    function setOperator(op) {
+      operator = op;
+      previousValue = currentValue;
+      currentValue = '';
+      updateDisplay();
+    }
 
-  function updateDisplay() {
-    document.getElementById('display').value = currentValue;
-  }
-</script>
+    function clearDisplay() {
+      currentValue = '';
+      operator = '';
+      previousValue = '';
+      updateDisplay();
+    }
 
+    function calculateResult() {
+      let result;
+      switch (operator) {
+        case '+':
+          result = parseFloat(previousValue) + parseFloat(currentValue);
+          break;
+        case '-':
+          result = parseFloat(previousValue) - parseFloat(currentValue);
+          break;
+        case '*':
+          result = parseFloat(previousValue) * parseFloat(currentValue);
+          break;
+        case '/':
+          result = parseFloat(previousValue) / parseFloat(currentValue);
+          break;
+        default:
+          result = currentValue;
+      }
+
+      currentValue = result.toString();
+      operator = '';
+      previousValue = '';
+      updateDisplay();
+    }
+
+    function updateDisplay() {
+      document.getElementById('display').value = currentValue;
+    }
+
+    function toggleTheme() {
+      isDarkMode = !isDarkMode;
+      const calculator = document.getElementById('calculator');
+      const display = document.getElementById('display');
+      const buttons = document.querySelectorAll('button');
+      const themeIcon = document.querySelector('.theme-toggle');
+
+      if (isDarkMode) {
+        document.body.style.background = '#000000';
+        calculator.classList.remove('light');
+        display.classList.remove('light');
+        buttons.forEach(btn => btn.classList.remove('light'));
+        themeIcon.innerHTML = '&#9788;';
+      } else {
+        document.body.style.background = '#f3f3f3';
+        calculator.classList.add('light');
+        display.classList.add('light');
+        buttons.forEach(btn => btn.classList.add('light'));
+        themeIcon.innerHTML = '&#9790;';
+      }
+    }
+
+
+  </script>
 </body>
+
 </html>
